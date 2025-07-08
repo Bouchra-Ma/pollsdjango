@@ -2,6 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Question
+from django.views import generic
+from .models import Question
+
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = "polls/detail.html"
 
 def index(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
