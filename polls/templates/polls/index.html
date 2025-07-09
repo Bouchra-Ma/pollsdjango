@@ -21,6 +21,15 @@
 </head>
 <body>
     <h1>Bienvenue sur l'app Polls </h1>
+    {% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucune question disponible.</p>
+{% endif %}
    
 </body>
 </html>
