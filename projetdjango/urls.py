@@ -19,13 +19,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.urls import include, path
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("polls/", include("polls.urls")),
-]
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('polls/', include('polls.urls')),
+    path('', include('polls.urls')),
 ]
 
 if settings.DEBUG:

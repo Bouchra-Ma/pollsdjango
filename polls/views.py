@@ -6,10 +6,17 @@ from django.views import generic
 from .models import Question
 from django.http import Http404
 from django.utils import timezone
+from rest_framework import viewsets
+from .serializers import QuestionSerializer
 
 class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
+
+
+class QuestionViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
 
 def index(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
@@ -30,3 +37,4 @@ def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     # ici, traite le vote (simplifié)
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
