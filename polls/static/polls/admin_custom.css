@@ -1,0 +1,7 @@
+#header {
+    background-color: #cc0000 !important; /* rouge vif */
+}
+
+#header h1, #header a {
+    color: white !important; /* texte en blanc */
+}
