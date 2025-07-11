@@ -10,6 +10,7 @@ from rest_framework import viewsets
 from .serializers import QuestionSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 class DetailView(generic.DetailView):
     model = Question
@@ -40,13 +41,21 @@ def vote(request, question_id):
     # ici, traite le vote (simplifié)
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
-@api_view(['GET', 'POST'])
-def hello_api(request):
-    if request.method == 'GET':
-        data = {"message": "Hello Bouchra from GET!"}
-        return Response(data)
+#@api_view(['GET', 'POST'])
+#def hello_api(request):
+    #if request.method == 'GET':
+        #data = {"message": "Hello Bouchra from GET!"}
+        #return Response(data)
     
-    elif request.method == 'POST':
-        name = request.data.get('name', 'inconnu')
-        data = {"message": f"Hello {name} from POST!"}
-        return Response(data)
+   # elif request.method == 'POST':
+       # name = request.data.get('name', 'inconnu')
+        #data = {"message": f"Hello {name} from POST!"}
+       # return Response(data)
+
+class HelloApiView(APIView):
+    def get(self, request):
+        return Response({"message": "Hello from class-based view GET"})
+
+    def post(self, request):
+        name = request.data.get("name", "inconnu")
+        return Response({"message": f"Hello {name} from class-based view POST"})
