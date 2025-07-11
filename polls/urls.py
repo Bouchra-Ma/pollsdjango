@@ -5,6 +5,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import QuestionViewSet
 
+
 app_name = "polls"
 
 router = DefaultRouter()
@@ -16,6 +17,7 @@ urlpatterns = [
     path("<int:question_id>/results/", views.results, name="results"),
     path("<int:question_id>/vote/", views.vote, name="vote"),
     path('api/', include(router.urls)),
+     path('api/hello/', views.hello_api, name='hello_api'),
 ]
 
 # Avant :
