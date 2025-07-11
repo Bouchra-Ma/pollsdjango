@@ -11,6 +11,8 @@ from .serializers import QuestionSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 class DetailView(generic.DetailView):
     model = Question
@@ -59,3 +61,10 @@ class HelloApiView(APIView):
     def post(self, request):
         name = request.data.get("name", "inconnu")
         return Response({"message": f"Hello {name} from class-based view POST"})
+    
+    class HelloClassView(APIView):
+     permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        content = {'message': 'Hello from class-based view GET (AUTH required)'}
+        return Response(content)
